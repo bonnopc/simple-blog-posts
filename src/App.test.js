@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { screen } from "@testing-library/react"
+import App from "./App"
+import renderWithRouter from "./helpers/renderWithRouter"
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+test('landing on a bad page', () => {
+    renderWithRouter(<App />, {route: '/something-that-does-not-match'})
+
+    expect(screen.getByText(/We can't find the post you're looking for!/i)).toBeInTheDocument()
+})
